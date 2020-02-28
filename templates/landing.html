@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-md">
+	<div class="row myrow">
+		<div class="col-12 text-center">
+			<h3>Mission To Mars</h3>
+			<form action="/scrape">
+			  <button type="submit" class="btn btn-dark">Scrape New Data</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="table-responsive-sm">
+	  	<table class="table">
+			<tbody>
+		    {{ data }}
+		    <tr>
+		        
+		        
+		    </tr>
+		    
+			</tbody>
+		</table>
+</div>
+{% endblock %}
