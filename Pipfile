@@ -15,6 +15,7 @@ beautifulsoup4 = "*"
 requests = "*"
 selenium = "*"
 pymongo = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"

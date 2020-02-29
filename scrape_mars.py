@@ -9,10 +9,19 @@ from selenium import webdriver
 import pymongo
 
 def read_scrape():
-    return "yo!"
+    conn = "mongodb://localhost:27017"
+    client = pymongo.MongoClient(conn)
+    
+    # Declare the database
+    db = client.mars_db
+
+    # Declare the collection
+    collection = db.mars_data
+
+    return db.mars_data.find({})
     
 
-def save_scrape():
+def save_scrape(scrape):
     conn = "mongodb://localhost:27017"
     client = pymongo.MongoClient(conn)
     
@@ -26,7 +35,7 @@ def save_scrape():
     if collection.count() > 0:
         collection.drop()
 
-    collection.insert_one(scrape())
+    collection.insert_one(scrape)
 
 
 def scrape():
@@ -38,12 +47,11 @@ def scrape():
     driver.get(NASA_URL)
     driver.implicitly_wait(10)
     nasa_html = driver.page_source
-    driver.close()
 
     # Loading page
     nasa_soup = BeautifulSoup(nasa_html, "lxml")
 
-    # Extract titles and text from divs
+    # Extract News Title
     news_title = [
         tag.text
         for tag in [
@@ -51,25 +59,25 @@ def scrape():
         ]
     ]
 
+    # Extract News Paragraph
     news_p = [
-        tag.text
+        tag
         for tag in [
-            li for ul in nasa_soup for li in ul.findAll("div", class_="article_teaser_body")
+            li for ul in nasa_soup for li in ul.findAll("div", class_="article_teaser_body")[0]
         ]
     ]
 
-    image_url = [
-        "https://mars.nasa.gov"
-        + tag.img["src"].replace("list_view", "main").replace("320x240", "web")
-        for tag in [li for ul in nasa_soup for li in ul.findAll("div", class_="list_image")]
-    ]
+    # Extract News Image
+    driver.find_elements_by_class_name("list_image")[0].click()
+    image_url = driver.find_element_by_id("main_image").get_attribute("src")
 
-    nasa_result = list(zip(news_title, news_p, image_url))
+    driver.close()
 
-
-    # Extract featured image url
-    featured_image_url = nasa_result[0][2]
-    featured_image_url
+    # Create the result list
+    nasa_result = []
+    nasa_result.append(news_title)
+    nasa_result.append(news_p)
+    nasa_result.append(image_url)
 
 
     # # Twitter Mars Weather
@@ -139,8 +147,8 @@ def scrape():
     # print(facts)
     # print("***")
     # print(hem_list)
-
-    return scrape_dict
+    save_scrape(scrape_dict)
+    return ""
 
 
 

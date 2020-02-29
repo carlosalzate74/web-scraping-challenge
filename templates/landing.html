@@ -11,16 +11,57 @@
 		</div>
 	</div>
 </div>
-<div class="table-responsive-sm">
-	  	<table class="table">
-			<tbody>
-		    {{ data }}
-		    <tr>
-		        
-		        
-		    </tr>
-		    
-			</tbody>
-		</table>
+<div class="container-md">
+	{% for line in data %}
+	<div class="row">
+		<div class="col-md-12">
+			<h5>Latest Mars News</h5>
+			<h6>{{ line["nr"][0][0] }}</h6>
+			<p>{{ line["nr"][1][0] }}</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<h5>Featured Mars Image</h5>
+			<img class="myimage" src='{{ line["nr"][2] }}'></img>
+		</div>
+
+		<div class="col-md-4">
+			<div class="row">
+				<h5>Current Weather On Mars</h5>
+				<p class="myp">{{ line["tw"] }}</p>
+			</div>
+			<hr class="style1">
+			<div class="row">
+				<h5>Mars Current Facts</h5>
+				<p>{{ (line["fc"])|safe }}</p>
+			</div>
+		</div>
+	</div>
+
+	<h5 class="center">Mars Hemispheres</h5>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<h6 class="center">{{ line["hm"][0]["title"] }}</h6>
+  			<img class="myimage" src='{{ line["hm"][0]["img_url"] }}'>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<h6 class="center">{{ line["hm"][1]["title"] }}</h6>
+  			<img class="myimage" src='{{ line["hm"][1]["img_url"] }}'>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<h6 class="center">{{ line["hm"][2]["title"] }}</h6>
+  			<img class="myimage" src='{{ line["hm"][2]["img_url"] }}'>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<h6 class="center">{{ line["hm"][3]["title"] }}</h6>
+  			<img class="myimage" src='{{ line["hm"][3]["img_url"] }}'>
+		</div>
+	</div>
+	
+
+
+	{% endfor %}
 </div>
 {% endblock %}
