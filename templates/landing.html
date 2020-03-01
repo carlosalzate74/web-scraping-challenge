@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-md">
+<div class="container-fluid">
 	<div class="row myrow">
 		<div class="col-12 text-center">
-			<h3>Mission To Mars</h3>
-			<form action="/scrape">
-			  <button type="submit" class="btn btn-dark">Scrape New Data</button>
-			</form>
+			<div class="row">
+				<div class="col-1">
+					<img class="marsbanner" src="static/marsbanner.jpeg"></img>
+				</div>
+
+				<div class="col-11">
+					<h3>Mission To Mars</h3>
+					<form action="/scrape">
+					  <button type="submit" class="btn btn-dark">Scrape New Data</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -60,8 +68,6 @@
 		</div>
 	</div>
 	
-
-
 	{% endfor %}
 </div>
 {% endblock %}

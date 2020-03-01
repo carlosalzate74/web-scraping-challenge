@@ -1,9 +1,15 @@
-body{
-	background: #EEE2DC;
+body {
+	background-image: url("marsbk.png");
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
+}
+
+h5, h6, p {
+	color: #FFF;
 }
 
 .myrow {
-	background: #9A4739;
 	padding-top: 25px;
 	padding-bottom: 25px;
 	color: #FFF;
@@ -14,10 +20,17 @@ body{
 	padding-bottom: 1rem;
 }
 
+.marsbanner{
+	width: 150%;
+	float: right;
+}
+
 .myp{
+	color: #FFF;
 	font-size: 16px;
 }
 
 table{
 	font-size: 16px;
+	color: #FFF;
 }
